@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/python
+import sys
+
+clines = sys.stdin.readlines()
+
+for c in clines:
+	sys.stdout.write(str(eval(c))+'\n')</string>
+	<key>fallbackInput</key>
+	<string>none</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^C</string>
+	<key>name</key>
+	<string>Evaluate expression with newlines</string>
+	<key>output</key>
+	<string>replaceSelectedText</string>
+	<key>scope</key>
+	<string>source.vpfit</string>
+	<key>uuid</key>
+	<string>94562F82-5E7C-4CB2-98A8-3A6CF93CC6F6</string>
+</dict>
+</plist>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/python
+import os, sys, re
+
+# this could easily be the complex version, but there's no need for it
+cl = re.findall("^[\s^\n]*([\.\w\* &lt;&gt;\?]+?)[\s^\n]+([0-9]*\.?[0-9]+)([a-z]{0,2})?([A-Z%]{0,2})?[\s^\n]+([0-9]*\.?[0-9]+)([a-z]{0,2})?([A-Z]{0,2})?[\s^\n]+", os.getenv('TM_CURRENT_LINE'))
+if len(cl) == 0:
+	sys.exit()
+species = cl[0][0]
+redshift = float(cl[0][4])
+
+if not os.getenv('ATOMDIR'):
+	print "Could not open file $ATOMDIR"
+	sys.exit()
+
+afn = os.getenv('ATOMDIR')
+if not os.path.isfile(afn):
+	print "Could not open file $ATOMDIR = %s" % afn
+	sys.exit()
+
+try:
+	atom = open(afn).readlines()
+except:
+	print "Could not open file $ATOMDIR = %s" % afn
+	sys.exit()
+
+atom_match = []
+for a in atom:
+	sr = re.findall("^[\s^\n]*(%s)[\s^\n]+([0-9]*\.?[0-9]+)[\s^\n]+([0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?)" % re.escape(species), a)
+	if len(sr) != 0:
+		wv_rest = float(sr[0][1])
+		osc_str = float(sr[0][2])
+		atom_match.append([wv_rest, osc_str])
+
+atom_match = sorted(atom_match, key=lambda a: a[1], reverse=True)
+
+for a in atom_match:
+	print "%s %i (%.2e) - %.4f" % (species, int(a[0]), a[1], (redshift+1.0)*a[0])
+</string>
+	<key>fallbackInput</key>
+	<string>line</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^W</string>
+	<key>name</key>
+	<string>Display line wavelengths - sort by f</string>
+	<key>output</key>
+	<string>showAsTooltip</string>
+	<key>scope</key>
+	<string>source.vpfit</string>
+	<key>uuid</key>
+	<string>C5C86620-1A81-4384-B58B-A0CAE379B2D5</string>
+</dict>
+</plist>

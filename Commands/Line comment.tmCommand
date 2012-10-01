@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/python
+import os, sys
+clines = sys.stdin.readlines()
+#if len(clines) == 0:
+#	sys.stdout.write("!")
+for c in clines:
+	if c[:1] == ' ':
+		sys.stdout.write("!%s" % c[1:])
+	elif c[:1] == '!':
+		sys.stdout.write(" %s" % c[1:])
+	else:
+		sys.stdout.write("! %s" % c[:])
+
+</string>
+	<key>fallbackInput</key>
+	<string>line</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>@/</string>
+	<key>name</key>
+	<string>Line comment</string>
+	<key>output</key>
+	<string>replaceSelectedText</string>
+	<key>scope</key>
+	<string>source.vpfit</string>
+	<key>uuid</key>
+	<string>3F887FF4-661D-4B44-B6BA-776639368CFB</string>
+</dict>
+</plist>

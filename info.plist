@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>VPFIT</string>
+	<key>ordering</key>
+	<array>
+		<string>B51FD1C7-2A3F-4108-A51C-052E43873121</string>
+		<string>32569267-8C2A-4B54-B0AE-07ACF5F174AC</string>
+		<string>54DB6D11-C737-4FD3-9AEA-241AC9165E51</string>
+		<string>4802D8DF-37FA-4FC6-B8C0-1E0F151EC6DC</string>
+		<string>A04F40FA-5F8F-404E-BB15-8AA10F5CEAA0</string>
+		<string>F7A5D11F-F74C-46E7-B1C3-E5BE27272D4B</string>
+		<string>3F887FF4-661D-4B44-B6BA-776639368CFB</string>
+		<string>64558603-11F9-46AA-8743-AA80DAF47EEA</string>
+		<string>C5C86620-1A81-4384-B58B-A0CAE379B2D5</string>
+		<string>AEE41A32-12E7-4C2B-A2C5-1659486F2622</string>
+		<string>FA0ACE26-8FEB-48A9-AFD8-A4F8145BA5C4</string>
+		<string>94562F82-5E7C-4CB2-98A8-3A6CF93CC6F6</string>
+		<string>815FAE11-CB52-4F94-80D3-0566B05B99DD</string>
+		<string>84F5AFB7-9C9A-4D84-BBD5-D3A2B6CB9F56</string>
+		<string>DD2517FA-A31B-4281-BA3F-2C1FE226692B</string>
+	</array>
+	<key>uuid</key>
+	<string>C735F120-1748-44F4-B61E-27211412E8BD</string>
+</dict>
+</plist>

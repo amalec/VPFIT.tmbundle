@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/python
+import os, sys, re
+
+cl = os.getenv('TM_CURRENT_LINE')
+cs = re.findall("^[\s^\n]*([\.\w\* &lt;&gt;\?]+?)[\s^\n]+([0-9]*\.?[0-9]+)([a-z]{0,2})?([A-Z%]{0,2})?[\s^\n]+([0-9]*\.?[0-9]+)@([0-9]*\.?[0-9]+)([a-z]{0,2})?([A-Z%]{0,2})?[\s^\n]+", cl)
+
+if len(cs) == 0:
+	sys.exit()
+
+species = cs[0][0]
+strans = cs[0][4]
+swave = float(cs[0][5])
+sstr = cs[0][4] + '@' + cs[0][5]
+
+if not os.getenv('ATOMDIR'):
+	print "Could not open file $ATOMDIR"
+	sys.exit()
+
+afn = os.getenv('ATOMDIR')
+if not os.path.isfile(afn):
+	print "Could not open file $ATOMDIR = %s" % afn
+	sys.exit()
+
+try:
+	atom = open(afn).readlines()
+except:
+	print "Could not open file $ATOMDIR = %s" % afn
+	sys.exit()
+
+for a in atom:
+	sr = re.findall("^[\s^\n]*(%s)[\s^\n]+([0-9]*\.?[0-9]+)" % re.escape(species), a)
+	if len(sr) != 0:
+		if sr[0][1].find(strans) != -1:
+			wv_rest = float(sr[0][1])
+			z = swave / wv_rest - 1.0
+			zs = "%.7f" % z
+			cli = cl.find(sstr)
+			sys.stdout.write(cl[:cli] + zs + cl[cli+len(sstr):])
+			sys.exit()
+</string>
+	<key>fallbackInput</key>
+	<string>line</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^z</string>
+	<key>name</key>
+	<string>Convert wavelength to z</string>
+	<key>output</key>
+	<string>replaceSelectedText</string>
+	<key>scope</key>
+	<string>source.vpfit</string>
+	<key>uuid</key>
+	<string>AEE41A32-12E7-4C2B-A2C5-1659486F2622</string>
+</dict>
+</plist>

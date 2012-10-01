@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/python
+import os, sys, glob, re
+from datetime import datetime
+
+fp = os.getenv('TM_FILEPATH')
+user = os.getenv('USER')
+doc = sys.stdin.read()
+now =  datetime.now().strftime("%d %b %Y %H:%M:%S")
+
+fp_path = os.path.dirname(fp)
+fp_name, fp_ext = os.path.splitext(os.path.basename(fp))
+
+copies = glob.glob("%s/%s_*%s" % (fp_path, fp_name, fp_ext))
+
+if copies:
+	ids = []
+	for ci in copies:
+		idmatch = re.match("%s/%s_([0-9]+)%s" % (re.escape(fp_path), re.escape(fp_name), re.escape(fp_ext)), ci)
+		if idmatch:
+			ids.append(int(idmatch.group(1)))
+	if ids:
+		maxid = max(ids)
+	else:
+		maxid = 0
+else:
+	maxid = 0
+out_fp = "%s/%s_%02i%s" % (fp_path, fp_name, maxid+1, fp_ext)
+
+header = "! Saved %s by %s\n" % (now, user)
+out_doc = header+doc
+
+out_f = open(out_fp, 'w')
+out_f.write(out_doc)
+out_f.close
+
+print "%s written" % out_fp
+</string>
+	<key>input</key>
+	<string>document</string>
+	<key>name</key>
+	<string>Save incremental copy</string>
+	<key>output</key>
+	<string>showAsTooltip</string>
+	<key>scope</key>
+	<string>source.vpfit</string>
+	<key>uuid</key>
+	<string>DD2517FA-A31B-4281-BA3F-2C1FE226692B</string>
+</dict>
+</plist>

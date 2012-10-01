@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/python
+import sys
+from math import log
+
+clines = sys.stdin.readlines()
+
+if len(clines) &gt; 1:
+	l10vals = [float(c) for c in clines]
+	l10desum = log(10**l10vals[0]-sum([10**l for l in l10vals[1:]]), 10)
+	
+	l10trans = [l10desum]
+	l10trans.extend(l10vals[1:])
+	
+	for l in l10trans:
+		sys.stdout.write('%2.5f\n' % l)</string>
+	<key>fallbackInput</key>
+	<string>none</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^;</string>
+	<key>name</key>
+	<string>Log10 top line desum</string>
+	<key>output</key>
+	<string>replaceSelectedText</string>
+	<key>scope</key>
+	<string>source.vpfit</string>
+	<key>uuid</key>
+	<string>84F5AFB7-9C9A-4D84-BBD5-D3A2B6CB9F56</string>
+</dict>
+</plist>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>!  atom     log(N)       z              b            x            v_turb T         rg</string>
+	<key>name</key>
+	<string>Component header</string>
+	<key>scope</key>
+	<string>source.vpfit</string>
+	<key>tabTrigger</key>
+	<string>header</string>
+	<key>uuid</key>
+	<string>54DB6D11-C737-4FD3-9AEA-241AC9165E51</string>
+</dict>
+</plist>

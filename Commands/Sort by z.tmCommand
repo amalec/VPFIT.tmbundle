@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/python
+import os, sys, re
+
+clines = sys.stdin.readlines()
+
+def clkey(l):
+	lf = re.findall("^[\s^\n]*([\.\w\* &lt;&gt;\?]+?)[\s^\n]+([0-9]*\.?[0-9]+)([a-z]{0,2})?([A-Z%]{0,2})?[\s^\n]+([0-9]*\.?[0-9]+)([a-z]{0,2})?([A-Z%]{0,2})?[\s^\n]+", l)
+	if len(lf) == 0:
+		return l
+	else:
+		return lf[0][4]
+
+clines_sorted = sorted(clines, key = clkey)
+
+for cl in clines_sorted:
+	sys.stdout.write(cl)
+</string>
+	<key>fallbackInput</key>
+	<string>none</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>keyEquivalent</key>
+	<string>^Z</string>
+	<key>name</key>
+	<string>Sort by z</string>
+	<key>output</key>
+	<string>replaceSelectedText</string>
+	<key>scope</key>
+	<string>source.vpfit</string>
+	<key>uuid</key>
+	<string>FA0ACE26-8FEB-48A9-AFD8-A4F8145BA5C4</string>
+</dict>
+</plist>
